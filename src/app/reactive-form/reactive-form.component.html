@@ -1,0 +1,233 @@
+<!-- Header Part -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Reactive Forms</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Content Part -->
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+        <!-- No Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element, let i = index"> {{i+1}} </td>
+        </ng-container>
+
+        <!-- Company Name Column -->
+        <ng-container matColumnDef="companyName">
+            <th mat-header-cell *matHeaderCellDef> Company Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.cName}} </td>
+        </ng-container>
+
+        <!-- First Name Column -->
+        <ng-container matColumnDef="fName">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.fName}} </td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="lName">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lName}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <!-- Mobile No Column -->
+        <ng-container matColumnDef="mobileNo">
+            <th mat-header-cell *matHeaderCellDef> Mobile No </th>
+            <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> Address </th>
+            <td mat-cell *matCellDef="let element"> {{element.address.blockNo}}, {{element.address.address}} -
+                {{element.address.city}} </td>
+        </ng-container>
+
+        <!-- Salary Column -->
+        <ng-container matColumnDef="salary">
+            <th mat-header-cell *matHeaderCellDef> Salary </th>
+            <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
+        </ng-container>
+
+        <!-- Adhar Card No Column -->
+        <ng-container matColumnDef="adharNo">
+            <th mat-header-cell *matHeaderCellDef> Adhar-Card </th>
+            <td mat-cell *matCellDef="let element"> {{element.personalDetails.adharNo}} </td>
+        </ng-container>
+
+        <!-- Pancard No Column -->
+        <ng-container matColumnDef="panNo">
+            <th mat-header-cell *matHeaderCellDef> Pan </th>
+            <td mat-cell *matCellDef="let element"> {{element.personalDetails.panNo}} </td>
+        </ng-container>
+
+        <!-- Passbook No Column -->
+        <ng-container matColumnDef="passbookNo">
+            <th mat-header-cell *matHeaderCellDef> Passbook</th>
+            <td mat-cell *matCellDef="let element"> {{element.personalDetails.passbookNo}} </td>
+        </ng-container>
+
+        <!-- Edit & Delete Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+
+                <button mat-icon-button style="color: green;"  (click)="fillDetail(element, content);">
+                    <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button style="color:red" (click)="deleteDetail(element);">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+</div>
+
+
+
+
+
+<!-- Add Data Part -->
+
+<form [formGroup]="myForm" novalidate>
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Prsonal Details</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="dismissDetail()"
+            (click)="modal.dismiss('Cross click')"></button>
+            <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+        </div>
+        <div class="modal-body">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="cName" placeholder="Company Name"
+                            formControlName="cName">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fName" placeholder="First Name"
+                            formControlName="fName">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="lName" placeholder="Last Name"
+                            formControlName="lName">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="mobileNo" placeholder="Mobile No"
+                            formControlName="mobileNo">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mb-3" formGroupName="address">
+                <div class="col-md-4">
+                    <div>
+                        <input type="text" class="form-control" id="blockNo" placeholder="Block No"
+                            formControlName="blockNo">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <input type="text" class="form-control" id="address" placeholder="Address"
+                            formControlName="address">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <input type="text" class="form-control" id="city" placeholder="City" formControlName="city">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="salary" placeholder="Salary"
+                            formControlName="salary">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3 form-group" formGroupName="personalDetails">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="adharNo" placeholder="Adharcard No"
+                            formControlName="adharNo">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <input type="text" class="form-control" id="panNo" placeholder="Pancard No"
+                            formControlName="panNo">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <input type="text" class="form-control" id="passbookNo" placeholder="Passbook No"
+                            formControlName="passbookNo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="dismissDetail()"
+            (click)="modal.dismiss('Cross click')">Cancle</button>
+
+            <!-- <button type="button" class="btn btn-outline-dark" (click)="btnUDToogle ? addDetail(): updateDetail()"
+            (click)="dismissDetail()" (click)="modal.close()">{{ btnUDToogle ? 'Add': 'Update' }}</button> -->
+            <button type="submit" class="btn btn-outline-dark" (click)="btnUDToogle ? addDetail() : editDetail()" (click)="modal.close()">{{ btnUDToogle ? 'Add': 'Update' }}</button>
+        </div>
+    </ng-template>
+</form>
+
+
+<button (click)="open(content)" mat-fab color="primary" class="addBtnPart"
+    aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+</button>

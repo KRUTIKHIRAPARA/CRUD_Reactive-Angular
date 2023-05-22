@@ -1,0 +1,23 @@
+{
+  "details": [
+    {
+      "id": 1,
+      "cName": "Krutik_011",
+      "fName": "Krutik",
+      "lName": "Hirpara",
+      "email": "krutik2511@gmail.com",
+      "mobileNo": "9566648484",
+      "address": {
+        "blockNo": "A-35",
+        "address": "Maninagar Society",
+        "city": "Ahemdabad"
+      },
+      "salary": "250000",
+      "personalDetails": {
+        "adharNo": "952536782597",
+        "panNo": "HDGFR5986K",
+        "passbookNo": "264849846416"
+      }
+    }
+  ]
+}
