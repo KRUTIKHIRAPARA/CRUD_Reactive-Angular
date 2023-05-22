@@ -11,7 +11,8 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2" type="search" name="search" (keyup)="searchDetail()"
+                    [(ngModel)]="searchVal" placeholder="Search">
             </form>
         </div>
     </div>
@@ -95,7 +96,7 @@
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
 
-                <button mat-icon-button style="color: green;"  (click)="fillDetail(element, content);">
+                <button mat-icon-button style="color: green;" (click)="fillDetail(element, content);">
                     <mat-icon>edit</mat-icon>
                 </button>
 
@@ -110,7 +111,8 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 30, 40, 50]" (click)="pagination()" showFirstLastButtons
+        aria-label="Select page of periodic elements">
     </mat-paginator>
 </div>
 
@@ -120,13 +122,12 @@
 
 <!-- Add Data Part -->
 
-<form [formGroup]="myForm" novalidate>
+<form [formGroup]="myForm">
     <ng-template #content let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Prsonal Details</h4>
             <button type="button" class="btn-close" aria-label="Close" (click)="dismissDetail()"
-            (click)="modal.dismiss('Cross click')"></button>
-            <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+                (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body">
             <div class="row mb-3">
@@ -217,11 +218,11 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" (click)="dismissDetail()"
-            (click)="modal.dismiss('Cross click')">Cancle</button>
+                (click)="modal.dismiss('Cross click')">Cancle</button>
 
-            <!-- <button type="button" class="btn btn-outline-dark" (click)="btnUDToogle ? addDetail(): updateDetail()"
-            (click)="dismissDetail()" (click)="modal.close()">{{ btnUDToogle ? 'Add': 'Update' }}</button> -->
-            <button type="submit" class="btn btn-outline-dark" (click)="btnUDToogle ? addDetail() : editDetail()" (click)="modal.close()">{{ btnUDToogle ? 'Add': 'Update' }}</button>
+            <button type="submit" [disabled]="!myForm.valid" class="btn btn-outline-dark"
+                (click)="btnUDToogle ? addDetail() : editDetail()" (click)="modal.close()">{{ btnUDToogle ? 'Add':
+                'Update' }}</button>
         </div>
     </ng-template>
 </form>

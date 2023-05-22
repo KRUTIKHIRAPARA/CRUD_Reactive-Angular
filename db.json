@@ -18,6 +18,25 @@
         "panNo": "HDGFR5986K",
         "passbookNo": "264849846416"
       }
+    },
+    {
+      "id": 9,
+      "cName": "assas",
+      "fName": "fghg",
+      "lName": "asas",
+      "email": "krutik2511@gmail.com",
+      "mobileNo": "4521365215",
+      "address": {
+        "blockNo": "asas",
+        "address": "asas",
+        "city": "as"
+      },
+      "salary": "456",
+      "personalDetails": {
+        "adharNo": "123456789632",
+        "panNo": "5643125632",
+        "passbookNo": "65848558525"
+      }
     }
   ]
 }
