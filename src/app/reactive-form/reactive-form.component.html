@@ -11,8 +11,8 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" name="search" (keyup)="searchDetail()"
-                    [(ngModel)]="searchVal" placeholder="Search">
+                <input class="form-control me-2" type="search" name="search" (keyup)="searchDetail();"
+                    [(ngModel)]="searchVal" autocomplete="off" placeholder="Search">
             </form>
         </div>
     </div>
@@ -160,7 +160,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="mobileNo" placeholder="Mobile No"
+                        <input type="text" class="form-control" name="mobileNo" id="mobileNo" placeholder="Mobile No"
                             formControlName="mobileNo">
                     </div>
                 </div>

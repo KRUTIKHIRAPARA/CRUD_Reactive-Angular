@@ -53,7 +53,7 @@ export class ReactiveFormComponent {
       fName: new FormControl('',[Validators.required,Validators.minLength(2),Validators.maxLength(10),Validators.pattern("^[a-zA-Z]+$")]),
       lName: new FormControl('',[Validators.required,Validators.minLength(2),Validators.maxLength(10),Validators.pattern("^[a-zA-Z]+$")]),
       email: new FormControl('',[Validators.required, Validators.email]),
-      mobileNo: new FormControl('',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]),
+      mobileNo: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       address: new FormGroup({
         blockNo: new FormControl('',[Validators.required]),
         address: new FormControl('',[Validators.required]),
@@ -61,11 +61,15 @@ export class ReactiveFormComponent {
       }),
       salary: new FormControl('',[Validators.required,Validators.minLength(2),Validators.maxLength(7)]),
       personalDetails: new FormGroup({
-        adharNo: new FormControl('',[Validators.required,Validators.minLength(12),Validators.maxLength(12)]),
+        adharNo: new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(12),Validators.maxLength(12)]),
         panNo: new FormControl('',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]),
-        passbookNo: new FormControl('',[Validators.required,Validators.minLength(8),Validators.maxLength(16)])
+        passbookNo: new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(8),Validators.maxLength(16)])
       })
     });
+  }
+
+  get f(){
+    return this.myForm.controls;
   }
 
   // Add Model Open Method
